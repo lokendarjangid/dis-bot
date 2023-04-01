@@ -9,7 +9,7 @@ import openai
 
 class Chatgpt:
     def __init__(self) -> None:
-        openai.api_key = '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'
+        openai.api_key = 'your_chatgpt_api_key'
 
     def write_code(self, prompt_text):
         response = openai.Completion.create(
@@ -33,7 +33,7 @@ class Chatgpt:
     def generate_image(self, prompt_text):
         response = openai.Image.create(
             prompt=prompt_text,
-            n=1,
+            n=3,
             size="1024x1024"
         )
         return response
@@ -110,8 +110,7 @@ def get_response(message: str) -> str:
         response = chat.write_code(prompt_text=command_user)
 
         for choice in response['choices']:
-            print(choice['text'])
-            return"Here is code"
+            return choice['text']
 
     else:
         response = chat.text_out(prompt_text=command_user)
